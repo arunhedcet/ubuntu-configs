@@ -1,3 +1,8 @@
-terminator : ~/.config/terminator/config
+#terminator 
+`~/.config/terminator/config`
 
-vim: ~/.vimrc
+#vim
+`~/.vimrc`
+
+#autostart
+`~/.config/`
