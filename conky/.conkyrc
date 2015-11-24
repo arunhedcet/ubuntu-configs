@@ -1,0 +1,114 @@
+# Conky Google Now style #
+# Conky settings #
+background no
+update_interval 1
+double_buffer yes
+no_buffers yes
+
+# Window specifications #
+own_window yes
+own_window_argb_visual false
+own_window_argb_value 0
+own_window_transparent yes
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_title 
+## own_window_colour 333333
+
+minimum_size 280
+maximum_width 300
+
+# Alignment #
+alignment mr
+gap_x 0
+gap_y -25
+
+border_inner_margin 10
+border_outer_margin 0
+
+# Graphics settings #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0
+xftfont Open Sans Light:size=10
+
+override_utf8_locale yes
+
+imlib_cache_size 0
+
+# Color scheme #
+default_color FFFFFF
+
+color1 FFBD00
+color2 03CDFF
+color3 5DEF1C
+color4 FF8800
+color5 CC0000
+color6 AAAAAA
+color7 DDDDDD
+
+TEXT
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=2295020&u=c" -o ~/.cache/weather.xml}${font Open Sans Light:size=12}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}
+${font Open Sans Light:size=70}${alignr 0}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}${voffset -35}
+${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 0,45 -s 60x60}
+${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | tr '[a-z]' '[A-Z]'}
+${image ~/.conky-google-now/wind.png -p 0,135 -s 15x15}${goto 35}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${image ~/.conky-google-now/humidity.png -p 0,155 -s 15x15}${goto 35}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}%${voffset 15}
+${goto 18}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${goto 78}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${goto 138}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${goto 198}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4' | tr '[a-z]' '[A-Z]'}${goto 258}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5' | tr '[a-z]' '[A-Z]'}
+${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 0,210 -s 30x30}${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 60,210 -s 30x30}${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 120,210 -s 30x30}${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4').png ~/.cache/weather-4.png}${image ~/.cache/weather-4.png -p 180,210 -s 30x30}${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5').png ~/.cache/weather-5.png}${image ~/.cache/weather-5.png -p 240,210 -s 30x30}${voffset 20}
+${goto 18}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${goto 78}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${goto 138}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${goto 198}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°${goto 258}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5'}°
+${goto 18}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${goto 78}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${goto 138}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${goto 198}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°${goto 258}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5'}°
+${color7}${hr}${color}
+${if_existing /proc/net/route wlp3s0}
+${goto 10}${color}Up:${color} ${color}${upspeed wlp3s0}${color}${alignr 10}${color}Down:${color} ${color}${downspeed wlp3s0}${color}
+${goto 10}${upspeedgraph eth0 32,72 FFFFFF FFFFFF}${alignr 10}${downspeedgraph eth0 32,72 FFFFFF FFFFFF}
+${goto 10}${color}Sent:${color} ${color}${totalup wlp3s0}${color}${alignr 10}${color}Received:${color} ${color}${totaldown wlp3s0}${color}
+${else}
+Network disconnected
+${color6}Connect to a network to see statistics${color}
+${voffset 75}
+${endif}
+${voffset -30}
+
+
+# Cpu, memory, uptime, and load graph #
+\
+# was 294 #
+${voffset 6}${goto 10}${color1}CPU:${color}
+${voffset 6}${goto 10}${color1}Mem:${color}
+${voffset 6}${goto 10}${color1}Temp:${color}
+${voffset 6}${goto 10}${color1}Uptime:${color}
+${voffset -90}${alignr 10}${color}${cpu cpu0}%${color}
+${voffset 6}${alignr 10}${color}${memperc}%${color}
+${voffset 6}${alignr 10}${color}${acpitemp}°C${color}
+${voffset 7}${alignr 10}${color}${uptime_short}${color}
+${voffset -90}${alignc}${color}${cpubar 5,36}${color}
+${voffset 6}${alignc}${color}${membar 5,36}${color}
+${voffset 40}${alignc}${loadgraph 24,190 FFFFFF CCCCCC -l}
+\
+# The processes section #
+\
+${voffset -5}${goto 10}${color1}Proc${color}
+${voffset -18}${alignc}${color1}Mem%${color}
+${voffset -19}${alignr 10}${color1}CPU%${color}
+${voffset 4}${goto 10}${color}${top_mem name 1}${color}
+${voffset 4}${goto 10}${color}${top_mem name 2}${color}
+${voffset 4}${goto 10}${color}${top_mem name 3}${color}
+${voffset 4}${goto 10}${color}${top_mem name 4}${color}
+${voffset 4}${goto 10}${color}${top_mem name 5}${color}
+${voffset -105}${alignc}${color2}${top_mem mem 1}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 2}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 3}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 4}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 5}%${color}
+${voffset -105}${alignr 10}${color4}${top_mem cpu 1}%${color}
+${voffset 4}${alignr 10}${color4}${top_mem cpu 2}%${color}
+${voffset 4}${alignr 10}${color4}${top_mem cpu 3}%${color}
+${voffset 4}${alignr 10}${color4}${top_mem cpu 4}%${color}
+${voffset 4}${alignr 10}${color4}${top_mem cpu 5}%${color}
+\
