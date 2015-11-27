@@ -75,14 +75,13 @@ ${voffset 3}${goto 10}${color1}Temp:${color}
 ${voffset 3}${goto 10}${color1}Uptime:${color}
 ${voffset 3}${goto 10}${color1}Load:${color}
 ${voffset -110}${alignr 10}${color}${cpu cpu0}%${color}
-${voffset 3}${alignr 10}${color}${memperc}%${color}
+${voffset 3}${alignr 10}${color}${mem}${color}
 ${voffset 3}${alignr 10}${color}${acpitemp}°C${color}
 ${voffset 3}${alignr 10}${color}${uptime_short}${color}
 ${voffset 3}${alignr 10}${color}${loadavg 1}${color}
 ${voffset -106}${alignc}${color}${cpubar 5,36}${color}
 ${voffset 7}${alignc}${color}${membar 5,36}${color}
-${voffset 28}${alignc}${loadgraph 24,150 FFFFFF CCCCCC -l}
-\
+${voffset 28}${alignc}${loadgraph 24,100 FFFFFF CCCCCC -l}
 # The processes section #
 \
 ${voffset 6}${goto 10}${color1}Proc${color}
@@ -92,21 +91,21 @@ ${voffset 4}${goto 10}${color}${top_mem name 1}${color}
 ${voffset 4}${goto 10}${color}${top_mem name 2}${color}
 ${voffset 4}${goto 10}${color}${top_mem name 3}${color}
 ${voffset 4}${goto 10}${color}${top_mem name 4}${color}
-${voffset -86}${alignc}${color2}${top_mem mem 1}%${color}
-${voffset 4}${alignc}${color2}${top_mem mem 2}%${color}
-${voffset 4}${alignc}${color2}${top_mem mem 3}%${color}
-${voffset 4}${alignc}${color2}${top_mem mem 4}%${color}
-${voffset -86}${alignr 10}${color4}${top_mem cpu 1}%${color}
-${voffset 4}${alignr 10}${color4}${top_mem cpu 2}%${color}
-${voffset 4}${alignr 10}${color4}${top_mem cpu 3}%${color}
-${voffset 4}${alignr 10}${color4}${top_mem cpu 4}%${color}
+${voffset -86}${alignc}${color}${top_mem mem 1}%${color}
+${voffset 4}${alignc}${color}${top_mem mem 2}%${color}
+${voffset 4}${alignc}${color}${top_mem mem 3}%${color}
+${voffset 4}${alignc}${color}${top_mem mem 4}%${color}
+${voffset -86}${alignr 10}${color}${top_mem cpu 1}%${color}
+${voffset 4}${alignr 10}${color}${top_mem cpu 2}%${color}
+${voffset 4}${alignr 10}${color}${top_mem cpu 3}%${color}
+${voffset 4}${alignr 10}${color}${top_mem cpu 4}%${color}
 \
 ${color7}${hr}${color}
 
 ${if_existing /proc/net/route wlan0}
 ${voffset -35}${color1}Up:${color} ${color3}${upspeed wlan0}${color}${alignr}${color1}Down:${color} ${color3}${downspeed wlan0}${color}
-${upspeedgraph wlan0 75,135 FF8800 FF8800}${alignr}${downspeedgraph wlan0 75,135 FF8800 FF8800}
-${color1}Sent:${color} ${color2}${totalup wlan0}${color}${alignr}${color1}Received:${color} ${color2}${totaldown wlan0}${color}
+${upspeedgraph wlan0 75,135 005544 005544}${alignr}${downspeedgraph wlan0 75,135 005544 005544}
+${color1}Sent:${color} ${color}${totalup wlan0}${color}${alignr}${color1}Received:${color} ${color}${totaldown wlan0}${color}
 ${else}${if_existing /proc/net/route wlan1}
 ${color1}Up:${color} ${color3}${upspeed wlan1}${color}${alignr}${color1}Down:${color} ${color3}${downspeed wlan1}${color}
 ${upspeedgraph wlan1 75,135 FF8800 FF8800}${alignr}${downspeedgraph wlan1 75,135 FF8800 FF8800}
@@ -122,7 +121,7 @@ ${color1}Sent:${color} ${color2}${totalup eth1}${color}${alignr}${color1}Receive
 ${else}${if_existing /proc/net/route ppp0}
 ${color1}Up:${color} ${color3}${upspeed ppp0}${color}${alignr}${color1}Down:${color} ${color3}${downspeed ppp0}${color}
 ${upspeedgraph ppp0 75,135 FF8800 FF8800}${alignr}${downspeedgraph ppp0 75,135 FF8800 FF8800}
-${color1}Sent:${color} ${color2}${totalup ppp0}${color}${alignr}${color1}Received:${color} ${color2}${totaldown ppp0}${color}
+${color1}Sent:${color} ${color}${totalup ppp0}${color}${alignr}${color1}Received:${color} ${color}${totaldown ppp0}${color}
 ${else}${if_existing /proc/net/route ppp1}
 ${color1}Up:${color} ${color3}${upspeed ppp1}${color}${alignr}${color1}Down:${color} ${color3}${downspeed ppp1}${color}
 ${upspeedgraph ppp1 75,135 FF8800 FF8800}${alignr}${downspeedgraph ppp1 75,135 FF8800 FF8800}
@@ -134,7 +133,7 @@ ${color1}Sent:${color} ${color2}${totalup usb0}${color}${alignr}${color1}Receive
 ${else}${if_existing /proc/net/route usb1}
 ${color1}Up:${color} ${color3}${upspeed usb1}${color}${alignr}${color1}Down:${color} ${color3}${downspeed usb1}${color}
 ${upspeedgraph usb1 75,135 FF8800 FF8800}${alignr}${downspeedgraph usb1 75,135 FF8800 FF8800}
-${color1}Sent:${color} ${color2}${totalup usb1}${color}${alignr}${color1}Received:${color} ${color2}${totaldown usb1}${color}
+${color1}Sent:${color} ${color}${totalup usb1}${color}${alignr}${color1}Received:${color} ${color}${totaldown usb1}${color}
 ${else}
 Network disconnected
 ${color6}Connect to a network to see statistics${color}
