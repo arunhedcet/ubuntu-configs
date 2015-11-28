@@ -81,7 +81,7 @@ ${voffset 3}${alignr 10}${color}${uptime_short}${color}
 ${voffset 3}${alignr 10}${color}${loadavg 1}${color}
 ${voffset -106}${alignc}${color}${cpubar 5,36}${color}
 ${voffset 7}${alignc}${color}${membar 5,36}${color}
-${voffset 28}${alignc}${loadgraph 24,100 FFFFFF CCCCCC -l}
+${voffset 28}${alignc}${loadgraph 24,100 002211 002211 -l}
 # The processes section #
 \
 ${voffset 6}${goto 10}${color1}Proc${color}
@@ -104,7 +104,7 @@ ${color7}${hr}${color}
 
 ${if_existing /proc/net/route wlan0}
 ${voffset -35}${color1}Up:${color} ${color3}${upspeed wlan0}${color}${alignr}${color1}Down:${color} ${color3}${downspeed wlan0}${color}
-${upspeedgraph wlan0 75,135 005544 005544}${alignr}${downspeedgraph wlan0 75,135 005544 005544}
+${upspeedgraph wlan0 75,135 003322 003322}${alignr}${downspeedgraph wlan0 75,135 003322 003322}
 ${color1}Sent:${color} ${color}${totalup wlan0}${color}${alignr}${color1}Received:${color} ${color}${totaldown wlan0}${color}
 ${else}${if_existing /proc/net/route wlan1}
 ${color1}Up:${color} ${color3}${upspeed wlan1}${color}${alignr}${color1}Down:${color} ${color3}${downspeed wlan1}${color}
